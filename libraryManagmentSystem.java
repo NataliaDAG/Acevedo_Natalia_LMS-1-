@@ -1,6 +1,6 @@
 // Natalia Acevedo
 // CEN-3024C
-// last updated 9/6/2023
+// last updated 10/8/2023
 // libraryManagmentSystem
 // The function of this class is that it is the main menu of the program it provides the user the option to select one of the--
 //-- 4 main options and connects the other two classes that are Book.java and Library.java. It also server as the place where--
@@ -15,11 +15,15 @@ public class libraryManagmentSystem {
 
         //Main menu options for the library program.
         while (true) {
-        	System.out.println("1. Show current book library");
+            System.out.println("1. Show current book library");
             System.out.println("2. Use the ID of a book to check it out");
             System.out.println("3. Add a new book to the library");
-            System.out.println("4. Shut down the library");
-            System.out.print("Please enter one of the four number choices above: ");
+            System.out.println("4. Remove a book by barcode");
+            System.out.println("5. Remove a book by title");
+            System.out.println("6. Check out a book by title");
+            System.out.println("7. Check in a book by title");
+            System.out.println("8. Shut down the library");
+            System.out.print("Please enter one of the eight number choices above: ");
             int choice = scanner.nextInt();
             
             switch (choice) {
@@ -41,13 +45,37 @@ public class libraryManagmentSystem {
                 String newBookAuthor = scanner.nextLine();
                 library.addBook(new Book(newBookId, newBookTitle, newBookAuthor));
                 break;
-            case 4:// Option 4 gives the user the option to shutdown and leave the library software.
+            case 4:// Option 4 asks the user for the barcode of the book they would like to remove 
+            	System.out.print("Enter the barcode of the book to remove: ");
+                int barcode = scanner.nextInt();
+                library.removeBookByBarcode(barcode);
+                break;
+            case 5:// Option 5 asks the user for the title of the book they would like to remove
+                scanner.nextLine(); // Consume newline character
+                System.out.print("Enter the title of the book to remove: ");
+                String titleToRemove = scanner.nextLine();
+                library.removeBookByTitle(titleToRemove);
+                break;
+            case 6:// Option 6 asks the user for the title of the book they would like to check out
+                scanner.nextLine(); // Consume newline character
+                System.out.print("Enter the title of the book to check out: ");
+                String titleToCheckOut = scanner.nextLine();
+                library.checkOutBookByTitle(titleToCheckOut);
+                break;
+            case 7:// Option 7 asks the user for the title of the book they would like to check in
+                scanner.nextLine(); // Consume newline character
+                System.out.print("Enter the title of the book to check in: ");
+                String titleToCheckIn = scanner.nextLine();
+                library.checkInBookByTitle(titleToCheckIn);
+                break;
+            case 8:// Option 8 gives the user the option to shutdown and leave the library software.
                 System.out.println("Shutting down...");
                 scanner.close();
                 System.exit(0);
-            default:// Here it will output the user to to back and pick only one of the 3 previous options because the option the entered is not a valid menu option. 
+            default:// Here it will output the user to to back and pick only one of the 8 previous options because the option the entered is not a valid menu option. 
                 System.out.println("Choice is not one of the number options please pick one of the options above!");
             }
         }
     }
 }
+
