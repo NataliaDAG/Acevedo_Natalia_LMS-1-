@@ -1,6 +1,6 @@
 // Natalia Acevedo
 // CEN-3024C
-// last updated 10/8/2023
+// last updated 10/15/2023
 // libraryManagmentSystem
 // The function of this class is that it is the main menu of the program it provides the user the option to select one of the--
 //-- 4 main options and connects the other two classes that are Book.java and Library.java. It also server as the place where--
@@ -43,7 +43,7 @@ public class libraryManagmentSystem {
                 String newBookTitle = scanner.nextLine();
                 System.out.print("Enter the author of the new book: ");
                 String newBookAuthor = scanner.nextLine();
-                library.addBook(new Book(newBookId, newBookTitle, newBookAuthor));
+                library.addBook(new Book(newBookId, newBookTitle, newBookAuthor, 0));
                 break;
             case 4:// Option 4 asks the user for the barcode of the book they would like to remove 
             	System.out.print("Enter the barcode of the book to remove: ");
