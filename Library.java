@@ -1,10 +1,14 @@
 // Natalia Acevedo
 // CEN-3024C
-// last updated 10/8/2023
+// last updated 10/15/2023
 // library
 // The function of this class is to provide details to the main class on how the list should look like.--
 //-- Also it provide information on how to remove a book from the list to the main class.
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,13 +69,14 @@ public class Library {
     }
 
     public void checkOutBookByTitle(String title) { //Here the library will tell the main LMS how to check out a book by title alone and confirm it
-        for (Book book : books) {
+    	for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
-                if (!checkedOutBooks.contains(book.getId())) {
+                if (book.getDueDate() == null) {
+                    book.setDueDate(getDueDate());
                     checkedOutBooks.add(book.getId());
-                    System.out.println("Book with title \"" + title + "\" has been checked out.");
+                    System.out.println("Book with title \"" + title + "\" has been checked out. Due Date: " + book.getDueDate());
                 } else {
-                    System.out.println("Book with title \"" + title + "\" is already checked out.");
+                    System.out.println("Book with title \"" + title + "\" is already checked out. Due Date: " + book.getDueDate());
                 }
                 return;
             }
@@ -81,9 +86,10 @@ public class Library {
 
     public void checkInBookByTitle(String title) {
         for (Book book : books) { // here it checks if the book has been checked in or checked out
-            if (book.getTitle().equalsIgnoreCase(title)) {
-                if (checkedOutBooks.contains(book.getId())) {
-                    checkedOutBooks.remove((Integer) book.getId());
+        	if (book.getTitle().equalsIgnoreCase(title)) {
+                if (book.getDueDate() != null) {
+                    book.setDueDate(null);
+                    checkedOutBooks.remove(book.getId());
                     System.out.println("Book with title \"" + title + "\" has been checked in.");
                 } else {
                     System.out.println("Book with title \"" + title + "\" is not checked out.");
@@ -93,10 +99,17 @@ public class Library {
         }
         System.out.println("Book with title \"" + title + "\" was not found in the library.");
     }
+    private Date getDueDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 10); // The book will be due in 10 days
+        return calendar.getTime();
+    }
     // Here it prints out the format of how the list view should look like for all the books.
     public void displayBooks() {
+    	System.out.println("Current book library:");
         for (Book book : books) {
-        	System.out.println("ID: " + book.getId() + ", Title: " + book.getTitle() + ", Author: " + book.getAuthor() + ", Barcode: " + book.getBarcode());
+            String dueDate = (book.getDueDate() != null) ? new SimpleDateFormat("MM/dd/yyyy").format(book.getDueDate()) : "null";
+            System.out.println("ID: " + book.getId() + ", Title: " + book.getTitle() + ", Author: " + book.getAuthor() + ", Barcode: " + book.getBarcode() + ", Due Date: " + dueDate);
         }
     }
 }
