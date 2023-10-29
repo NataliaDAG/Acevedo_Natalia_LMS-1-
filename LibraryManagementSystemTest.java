@@ -1,3 +1,8 @@
+// Natalia Acevedo
+// CEN-3024C
+// last updated 10/29/2023
+// LibraryManagementSystemTest
+// this class is the Junit test for the program
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
