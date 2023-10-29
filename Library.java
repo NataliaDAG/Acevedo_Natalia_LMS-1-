@@ -1,6 +1,6 @@
 // Natalia Acevedo
 // CEN-3024C
-// last updated 10/15/2023
+// last updated 10/29/2023
 // library
 // The function of this class is to provide details to the main class on how the list should look like.--
 //-- Also it provide information on how to remove a book from the list to the main class.
@@ -42,33 +42,35 @@ public class Library {
         System.out.println("Book with ID " + id + " is already checked out.");
     }
 }
-    public void removeBookByBarcode(int barcode) { //Here the library will tell the main LMS how to remove a book with a barcode from the library
+    public boolean removeBookByBarcode(int barcode) { //Here the library will tell the main LMS how to remove a book with a barcode from the library
         Iterator<Book> iterator = books.iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
             if (book.getBarcode() == barcode) {
                 iterator.remove();
                 System.out.println("Book with barcode " + barcode + " has been removed from the library.");
-                return;
+                return false;
             }
         }
         System.out.println("Book with barcode " + barcode + " was not found in the library.");
+		return false;
     }
 
-    public void removeBookByTitle(String title) { //Here the library will tell the main LMS how to remove a book by title alone and confirm it
+    public boolean removeBookByTitle(String title) { //Here the library will tell the main LMS how to remove a book by title alone and confirm it
         Iterator<Book> iterator = books.iterator();
         while (iterator.hasNext()) {
             Book book = iterator.next();
             if (book.getTitle().equalsIgnoreCase(title)) {
                 iterator.remove();
                 System.out.println("Book with title \"" + title + "\" has been removed from the library.");
-                return;
+                return false;
             }
         }
         System.out.println("Book with title \"" + title + "\" was not found in the library.");
+		return false;
     }
 
-    public void checkOutBookByTitle(String title) { //Here the library will tell the main LMS how to check out a book by title alone and confirm it
+    public boolean checkOutBookByTitle(String title) { //Here the library will tell the main LMS how to check out a book by title alone and confirm it
     	for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title)) {
                 if (book.getDueDate() == null) {
@@ -78,10 +80,11 @@ public class Library {
                 } else {
                     System.out.println("Book with title \"" + title + "\" is already checked out. Due Date: " + book.getDueDate());
                 }
-                return;
+                return false;
             }
         }
         System.out.println("Book with title \"" + title + "\" was not found in the library.");
+		return false;
     }
 
     public void checkInBookByTitle(String title) {
@@ -112,4 +115,8 @@ public class Library {
             System.out.println("ID: " + book.getId() + ", Title: " + book.getTitle() + ", Author: " + book.getAuthor() + ", Barcode: " + book.getBarcode() + ", Due Date: " + dueDate);
         }
     }
+	public Object getBooks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
