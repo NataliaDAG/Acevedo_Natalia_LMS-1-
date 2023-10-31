@@ -29,18 +29,23 @@ class LibraryManagementSystemTest {
     @Test
     public void testAddBook() {
         library.addBook(new Book(3, "Book3", "Author3", 103));
-        Object newSize = library.getBooks();
-        equals( newSize);
+        library.getBooks();
+        assertEquals();
     }
 
     @Test
     public void testRemoveBookByBarcode() {
         library.removeBookByBarcode(101);
-        Object newSize = library.getBooks();
-        equals(newSize);
+        library.getBooks();
+        assertEquals();
     }
 
-    @Test
+    private void assertEquals() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Test
     public void testCheckOutBookByTitle() {
         library.checkOutBookByTitle("Book1");
         assertTrue(library.getBooks() != null);
