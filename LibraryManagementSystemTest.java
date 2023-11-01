@@ -7,8 +7,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-
+import org.junit.Assert;
 class LibraryManagementSystemTest {
 
 	private Library library;
@@ -40,11 +39,6 @@ class LibraryManagementSystemTest {
         assertEquals();
     }
 
-    private void assertEquals() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Test
     public void testCheckOutBookByTitle() {
         library.checkOutBookByTitle("Book1");
@@ -58,3 +52,4 @@ class LibraryManagementSystemTest {
         assertNull(library.getBooks());
     }
 }
+
