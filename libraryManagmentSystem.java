@@ -1,11 +1,12 @@
 // Natalia Acevedo
 // CEN-3024C
-// last updated 10/29/2023
+// last updated 11/12/2023
 // libraryManagmentSystem
 // The function of this class is that it is the main menu of the program it provides the user the option to select one of the--
 //-- 4 main options and connects the other two classes that are Book.java and Library.java. It also server as the place where--
 //-- you can input the information of the new book that you would like to add to the library list in this class.
 // This class is the Main Method class
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class libraryManagmentSystem {
@@ -75,8 +76,23 @@ public class libraryManagmentSystem {
             default:// Here it will output the user to to back and pick only one of the 8 previous options because the option the entered is not a valid menu option. 
                 System.out.println("Choice is not one of the number options please pick one of the options above!");
             }
+            public static Connection getConnection() throws Exception{
+            	  try{
+            	   String driver = "com.mysql.jdbc.Driver";
+            	   String url = "jdbc:mysql://24.196.52.166:3306/testdb";
+            	   String username = "username";
+            	   String password = "password";
+            	   Class.forName(driver);
+            	   
+            	   Connection conn = DriverManager.getConnection(url,username,password);
+            	   System.out.println("Connected");
+            	   return conn;
+            	  } catch(Exception e){System.out.println(e);}
+            	  
+            	  
+            	  return null;
+            	 }
         }
     }
 }
-
 
